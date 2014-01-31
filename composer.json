@@ -1,0 +1,26 @@
+{
+    "name" : "coogle/logger",
+    "description" : "An Event-driven Logging module for Zend Framework 2",
+    "type" : "library",
+    "homepage" : "http://www.github.com/coogle/Logger",
+    "require" : {
+        "zendframework/zendframework" : ">2.2.0"
+    },
+    "license" : "BSD-3-Clause",
+    "authors" : [
+      {
+        "name" : "John Coggeshall",
+        "email" : "john@coggeshall.org",
+        "homepage" : "http://www.coggeshall.org",
+        "role" : "Developer"
+      }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Logger\\": "src/"
+        },
+	"classmap" : [
+		"./Module.php"
+	]
+    }
+}
