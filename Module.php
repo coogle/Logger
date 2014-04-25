@@ -11,6 +11,8 @@ use Zend\Log\Writer\Stream as StreamWriter;
 use Zend\Log\Logger;
 use Zend\Log\Filter\Priority as PriorityFilter;
 
+use Zend\Console\Request as ConsoleRequest;
+
 class Module
 {
 	public function getAutoloaderConfig()
@@ -93,7 +95,7 @@ class Module
 
 			$extras = array(
 				'source' => $targetClass,
-				'uri' => $request->getUriString(),
+				'uri' => ($request instanceof ConsoleRequest ? 'console':$request->getUriString()),
 				'ip' => $remoteAddress->getIpAddress(),
 				'session_id' => session_id()
 			);
