@@ -13,6 +13,9 @@ use Zend\Log\Filter\Priority as PriorityFilter;
 
 use Zend\Console\Request as ConsoleRequest;
 
+use Logger\GraylogWriter as GraylogWriter;
+
+
 class Module
 {
 	public function getAutoloaderConfig()
@@ -80,6 +83,20 @@ class Module
 			$streamWriter = new StreamWriter($appConfig['logger']['log_file']);
 			$streamWriter->addFilter($logFilter);
 			$logger->addWriter($streamWriter);
+		}
+
+		if(!is_null($appConfig['logger']['gelf_hostname'])) {
+		    if((empty($appConfig['logger']['gelf_port']))) {
+		    	throw new \RuntimeException("You must specify a 'gelf_port' config param");
+		    }
+		    
+		    $hostName = $appConfig['logger']['gelf_hostname'];
+			$port = $appConfig['logger']['gelf_port'];
+		    
+		    $logWriter = new GraylogWriter($appConfig['logger']['gelf_facility'], $hostName, $port);
+		    
+		    $logWriter->addFilter($logFilter);
+		    $logger->addWriter($logWriter);
 		}
 	
 		$request = $e->getApplication()->getRequest();
