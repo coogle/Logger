@@ -23,12 +23,6 @@ class GelfFormatter extends Base
     public function format($event) {
         $message = new GELFMessage();
 
-        if (isset($event['extra']['uri'])) {
-            $message->setHost($event['extra']['uri']);
-        } else {
-            $message->setHost(gethostname());
-        }
-
         if (isset($event['priority'])) {
             $message->setLevel($event['priority']);
         } else if (isset($event['errno'])) {
@@ -41,8 +35,8 @@ class GelfFormatter extends Base
         if (isset($event['full'])) $message->setFullMessage($event['full']);
         if (isset($event['short'])) $message->setShortMessage($event['short']);
 
-        if (isset($event['file'])) $message->setFile($event['file']);
-        if (isset($event['line'])) $message->setLine($event['line']);
+        if (isset($event['extra']['file'])) $message->setFile($event['extra']['file']);
+        if (isset($event['extra']['line'])) $message->setLine($event['extra']['line']);
 
         if (isset($event['version'])) $message->setVersion($event['version']);
 
