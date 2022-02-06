@@ -44,7 +44,7 @@ class GelfFormatter extends Base
 
         $timestamp = $event['timestamp'];
         if ($event['timestamp'] && ($event['timestamp'] instanceof \DateTime)) {
-            $timestamp = $event['timestamp']->getTimestamp();
+            $timestamp = $event['timestamp']->getTimestamp() + $event['timestamp']->getOffset();
         }
         $message->setTimestamp($timestamp);
 
