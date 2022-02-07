@@ -32,6 +32,7 @@ class GelfFormatter extends Base
 
         $message->setFullMessage($event['message']);
         $message->setShortMessage($event['message']);
+        
         if (isset($event['full'])) $message->setFullMessage($event['full']);
         if (isset($event['short'])) $message->setShortMessage($event['short']);
 
