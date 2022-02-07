@@ -4,7 +4,8 @@
     "type" : "library",
     "homepage" : "http://www.github.com/coogle/Logger",
     "require" : {
-        "zendframework/zendframework" : ">2.2.0"
+        "zendframework/zendframework" : ">2.2.0",
+        "graylog2/gelf-php": "^1.7"
     },
     "license" : "BSD-3-Clause",
     "authors" : [
